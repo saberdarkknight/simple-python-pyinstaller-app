@@ -68,16 +68,16 @@ pipeline {
                             //This bundles your add2vals.py Python application into a single standalone executable file
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'"
-                            sh 'python2 setup.py bdist_dumb --format=zip'
+                             sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python2 -m PyInstaller -F add2vals.py'"
                         }
                     }
                     post {
                         success {
                             //This archiveArtifacts step archives the standalone executable file and exposes this file
                             //through the Jenkins interface.
-                            //archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
-                            //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
-                            archiveArtifacts "${env.BUILD_ID}/dist/*"
+                            archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
+                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
+
                         }
                     }
         }
