@@ -55,7 +55,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python -m pyinstaller sources/add2vals.py'
+                sh 'python -m pyinstaller --hidden-import FileDialog sources/add2vals.py'
             }
             post {
                 success {
