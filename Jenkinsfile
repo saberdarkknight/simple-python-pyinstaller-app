@@ -55,7 +55,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pyinstaller -F -p usr/anaconda3/lib/site-packages sources/add2vals.py'
+                sh 'pyinstaller --onefile sources/add2vals.py'
             }
             post {
                 success {
