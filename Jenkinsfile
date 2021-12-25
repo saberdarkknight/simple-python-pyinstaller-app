@@ -20,6 +20,7 @@ pipeline {
                 //This stash step saves the Python source code and compiled byte code files from the sources
                 //workspace directory for use in later stages.
                 stash(name: 'compiled-results', includes: 'sources/*.py*')
+                
             }
         }
         stage('Test') {
@@ -56,7 +57,8 @@ pipeline {
             }
             steps {
                 //sh 'pyinstaller --onefile sources/add2vals.py'
-                sh 'python -m sources/setup.py'
+                sh 'pip install pyinstaller'
+                sh 'pyinstaller -F sources/setup.py'
             }
             post {
                 success {
