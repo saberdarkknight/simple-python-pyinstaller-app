@@ -4,13 +4,13 @@ the calc.py library's 'add2' function.
 '''
 
 import sys
-import test.calc
+from test.calc import conv, add2
 
 argnumbers = len(sys.argv) - 1
 
 if argnumbers == 2 :
     print("")
-    print("The result is " + str(calc.add2(str(sys.argv[1]), str(sys.argv[2]))))
+    print("The result is " + str(add2(str(sys.argv[1]), str(sys.argv[2]))))
     print("")
     sys.exit(0)
 
