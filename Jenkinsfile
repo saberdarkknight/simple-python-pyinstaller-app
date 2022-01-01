@@ -59,7 +59,7 @@ pipeline {
                 //sh 'pyinstaller --onefile sources/add2vals.py'
                 //sh 'pip install pyinstaller'
                 //sh 'pyinstaller -F sources/setup.py'
-                sh " docker rm -v ${image} 'pyinstaller --onefile sources/add2vals.py'"
+                sh " docker run --rm -v ${image} 'pyinstaller --onefile sources/add2vals.py'"
             }
             post {
                 success {
