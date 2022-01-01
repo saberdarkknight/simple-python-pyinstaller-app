@@ -4,7 +4,7 @@ the calc.py library's 'add2' function.
 '''
 
 import sys
-from test.calc import conv, add2
+from test.calc import add2
 
 argnumbers = len(sys.argv) - 1
 
