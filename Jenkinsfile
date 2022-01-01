@@ -73,7 +73,7 @@ pipeline {
                             //This sh step executes the pyinstaller command (in the PyInstaller container) on your simple Python application.
                             //This bundles your add2vals.py Python application into a single standalone executable file
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
-                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m pyinstaller -F add2vals.py'"
+                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
                             //sh "ls -la ${VOLUME}"
                             //sh "docker run --rm -v ${VOLUME} --entrypoint cat  ${IMAGE} add2vals.py"
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
