@@ -76,7 +76,7 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
                             //sh "ls -la ${VOLUME}"
                             sh "docker run --rm -v ${VOLUME} --entrypoint cat  ${IMAGE} add2vals.py"
-                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'"
+                            sh "docker run --rm -v ${VOLUME} ${IMAGE} -w/src 'pyinstaller -F add2vals.py'"
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
