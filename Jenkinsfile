@@ -54,7 +54,7 @@ pipeline {
                     //This environment block defines two variables which will be used later in the 'Deliver' stage.
                     environment {
                         VOLUME = '$(pwd)/sources:/src'
-                        IMAGE = 'cdrx/pyinstaller-linux:python2'
+                        IMAGE = 'cdrx/pyinstaller-linux:python3'
                     }
                     steps {
                         //This dir step creates a new subdirectory named by the build number.
