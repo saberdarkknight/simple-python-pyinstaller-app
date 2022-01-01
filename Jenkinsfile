@@ -2,6 +2,9 @@ pipeline {
 //None parameter in the agent section means that no global agent will be allocated for the entire Pipeline’s
 //execution and that each stage directive must specify its own agent section.
     agent none
+    options{
+        skipStagesAfterUnstable()
+    }
     stages {
         stage('Build') {
             agent {
@@ -53,8 +56,8 @@ pipeline {
                     agent any
                     //This environment block defines two variables which will be used later in the 'Deliver' stage.
                     environment {
-                        //VOLUME = '$(pwd)/sources:/src'
-                        VOLUME = '$WORKSPACE/sources:/src'
+                        VOLUME = '$(pwd)/sources:/src'
+                        //VOLUME = '$WORKSPACE/sources:/src'
                         IMAGE = 'cdrx/pyinstaller-linux:python3'
                     }
                     steps {
