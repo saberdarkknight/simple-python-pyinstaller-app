@@ -51,23 +51,31 @@ pipeline {
         }
         stage('Deliver') {
         agent {
-                docker {
-                    //image 'cdrx/pyinstaller-linux:python3'
-                    image 'python:3-alpine'
-                }
-            }
-            steps {
-                //sh 'pyinstaller --onefile sources/add2vals.py'
-                sh 'pip install pyinstaller'
-                //sh 'pyinstaller -F sources/setup.py'
-                //sh " docker run --rm -v ${image} 'pyinstaller --onefile sources/add2vals.py'"
-                //sh 'pip install pyinstaller'
-                //sh 'pyinstaller -F sources/add2vals.py'
-                sh " docker run --rm -v 'pyinstaller --onefile sources/add2vals.py'"
-            }
+                environment {
+                        VOLUME = '$(pwd)/sources:/src'
+                        IMAGE = 'cdrx/pyinstaller-linux:python2'
+                    }
+                    steps {
+                        //This dir step creates a new subdirectory named by the build number.
+                        //The final program will be created in that directory by pyinstaller.
+                        //BUILD_ID is one of the pre-defined Jenkins environment variables.
+                        //This unstash step restores the Python source code and compiled byte
+                        //code files (with .pyc extension) from the previously saved stash. image]
+                        //and runs this image as a separate container.
+                        dir(path: env.BUILD_ID) {
+                            unstash(name: 'compiled-results')
+
+                            //This sh step executes the pyinstaller command (in the PyInstaller container) on your simple Python application.
+                            //This bundles your add2vals.py Python application into a single standalone executable file
+                            //and outputs this file to the dist workspace directory (within the Jenkins home directory).
+                            sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'"
+                        }
+                    }
             post {
                 success {
-                    archiveArtifacts 'dist/add2vals'
+                    //archiveArtifacts 'dist/add2vals'
+                    archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
+                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                 }
             }
         }
