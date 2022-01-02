@@ -91,7 +91,7 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
-                            sh 'pyinstaller --onefile ${env.WORKSPACE}/${env.BUILD_ID}/sources/addvals.py'
+                            sh "pyinstaller --onefile ${env.WORKSPACE}/${env.BUILD_ID}/sources/addvals.py"
                         }
                     }
             post {
