@@ -56,8 +56,8 @@ pipeline {
                     agent any
                     //This environment block defines two variables which will be used later in the 'Deliver' stage.
                     environment {
-                        VOLUME = '$(pwd)/sources:/src'
-                        //VOLUME = '$WORKSPACE/sources:/src'
+                        //VOLUME = '$(pwd)/sources:/src'
+                        //VOLUME = '${env.WORKSPACE}/sources:/src'
                         IMAGE = 'cdrx/pyinstaller-linux:python3'
                     }
                     steps {
@@ -75,9 +75,9 @@ pipeline {
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
                             //sh "ls -la ${VOLUME}"
-                            sh "docker run --rm -v ${VOLUME} --entrypoint pwd"
-                            sh "docker run --rm -v ${VOLUME} --entrypoint cat add2vals.py"
-                            sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'"
+                            sh "docker run --rm -v ${env.WORKSPACE}/env.BUILD_ID/sources --entrypoint pwd ${IMAGE}"
+                            sh "docker run --rm -v ${env.WORKSPACE}/env.BUILD_ID/sources  --entrypoint cat add2vals.py"
+                            sh "docker run -v ${env.WORKSPACE}/env.BUILD_ID/sources  ${IMAGE} 'pyinstaller -F add2vals.py'"
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
