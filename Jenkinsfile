@@ -80,17 +80,17 @@ pipeline {
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
                             //sh "ls -la ${VOLUME}"
-                            //sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
-                            //sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
+                            sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
+                            sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
                             sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' --entrypoint pwd ${IMAGE} "
                             //sh "docker run --rm -v  ${VOLUME} ${IMAGE} 'ls'"
-                            sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' ${IMAGE} 'ls' "
+                            //sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' ${IMAGE} 'ls' "
                             //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources:/src ${IMAGE} 'ls' "
-                            sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} src/add2vals.py"
+                            //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} src/add2vals.py"
                             //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  ${IMAGE} 'pyinstaller -F ${env.WORKSPACE}/${env.BUILD_ID}/sources/add2vals.py'"
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
-                           // sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
+                            //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'pyinstaller -F sources/add2vals.py'
                         }
                     }
