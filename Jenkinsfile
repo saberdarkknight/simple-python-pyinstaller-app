@@ -62,9 +62,6 @@ pipeline {
                //      }
               agent {
                 docker {
-                    //This image parameter (of the agent section’s docker parameter) downloads the python:2-alpine
-                    //Docker image and runs this image as a separate container. The Python container becomes
-                    //the agent that Jenkins uses to run the Build stage of your Pipeline project.
                     image 'cdrx/pyinstaller-linux:python3'
                 }
             }
@@ -91,7 +88,7 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
-                            sh "python -m pyinstaller --onefile ${env.WORKSPACE}/${env.BUILD_ID}/sources/add2vals.py"
+                            sh "python -m PyInstaller --onefile ${env.WORKSPACE}/${env.BUILD_ID}/sources/add2vals.py"
                         }
                     }
             post {
