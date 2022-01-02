@@ -63,7 +63,8 @@ pipeline {
              agent {
              docker {
                  // image 'cdrx/pyinstaller-linux:python3'
-                  image 'python:3-alpine'
+                 //image 'python:3-alpine'
+                 image 'six8/pyinstaller-alpine'
                    }
                 }
                     steps {
@@ -92,7 +93,7 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
-                            sh "python3 -m pip install pyinstaller"
+                            //sh "python3 -m pip install pyinstaller"
                             sh 'pyinstaller -F sources/add2vals.py'
                         }
                     }
