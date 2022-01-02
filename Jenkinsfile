@@ -58,7 +58,7 @@ pipeline {
                     environment {
                         VOLUME = '$(pwd)/sources:/src'
                         //VOLUME = '${env.WORKSPACE}/sources:/src'
-                        IMAGE = 'cdrx/pyinstaller-linux:python3'
+                        IMAGE = 'cdrx/pyinstaller-windows:python3'
                      }
              // agent {
              //  docker {
