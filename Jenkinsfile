@@ -82,6 +82,7 @@ pipeline {
                             //sh "ls -la ${VOLUME}"
                             //sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
                             sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
+                            sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src'  --entrypoint pwd ${IMAGE} "
                             sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src'  --entrypoint ls ${IMAGE} /src"
                             sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} add2vals.py"
                             sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources  ${IMAGE} 'pyinstaller -F ${env.WORKSPACE}/${env.BUILD_ID}/sources/add2vals.py'"
