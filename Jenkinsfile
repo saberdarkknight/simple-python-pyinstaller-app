@@ -63,8 +63,8 @@ pipeline {
               agent {
                 docker {
                    image 'cdrx/pyinstaller-linux:python3'
-               }
-              }
+                   }
+                }
                     steps {
                         //This dir step creates a new subdirectory named by the build number.
                         //The final program will be created in that directory by pyinstaller.
