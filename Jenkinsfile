@@ -92,7 +92,7 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
-                            sh "pip install -r pyinstall --user"
+                            sh "pip3 install -r pyinstaller --user"
                             sh 'pyinstaller -F sources/add2vals.py'
                         }
                     }
