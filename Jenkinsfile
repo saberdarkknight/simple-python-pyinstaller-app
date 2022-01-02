@@ -53,13 +53,21 @@ pipeline {
             }
         }
         stage('Deliver') {
-                    agent any
-                    //This environment block defines two variables which will be used later in the 'Deliver' stage.
-                    environment {
-                        //VOLUME = '$(pwd)/sources:/src'
-                        //VOLUME = '${env.WORKSPACE}/sources:/src'
-                        IMAGE = 'cdrx/pyinstaller-linux:python3'
-                    }
+               //     agent any
+               //     //This environment block defines two variables which will be used later in the 'Deliver' stage.
+               //     environment {
+               //         //VOLUME = '$(pwd)/sources:/src'
+               //         //VOLUME = '${env.WORKSPACE}/sources:/src'
+               //         IMAGE = 'cdrx/pyinstaller-linux:python3'
+               //      }
+              agent {
+                docker {
+                    //This image parameter (of the agent section’s docker parameter) downloads the python:2-alpine
+                    //Docker image and runs this image as a separate container. The Python container becomes
+                    //the agent that Jenkins uses to run the Build stage of your Pipeline project.
+                    image 'cdrx/pyinstaller-linux:python3'
+                }
+            }
                     steps {
                         //This dir step creates a new subdirectory named by the build number.
                         //The final program will be created in that directory by pyinstaller.
