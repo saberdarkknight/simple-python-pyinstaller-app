@@ -77,7 +77,7 @@ pipeline {
                             //sh "ls -la ${VOLUME}"
                             sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
                             sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
-                            sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint ls ${IMAGE} /src"
+                            sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint ls -la ${IMAGE}"
                             sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} addvals.py"
                             sh "docker run -v ${env.WORKSPACE}/${env.BUILD_ID}/sources  ${IMAGE} 'pyinstaller -F ${env.WORKSPACE}/${env.BUILD_ID}/sources/add2vals.py'"
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
