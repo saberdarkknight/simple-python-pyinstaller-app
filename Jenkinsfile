@@ -65,8 +65,8 @@ pipeline {
              //    // image 'cdrx/pyinstaller-linux:python3'
              //    //image 'python:3-alpine'
              //    image 'six8/pyinstaller-alpine'
-                   }
-                }
+             //      }
+             //   }
                     steps {
                         //This dir step creates a new subdirectory named by the build number.
                         //The final program will be created in that directory by pyinstaller.
