@@ -53,18 +53,19 @@ pipeline {
             }
         }
         stage('Deliver') {
-                    agent any
-                    //This environment block defines two variables which will be used later in the 'Deliver' stage.
-                    environment {
-                        VOLUME = '$(pwd)/sources:/src'
-                        //VOLUME = '${env.WORKSPACE}/sources:/src'
-                        IMAGE = 'cdrx/pyinstaller-windows:python3'
-                     }
-             // agent {
-             //  docker {
-             //      image 'cdrx/pyinstaller-linux:python3'
-             //      }
-             //   }
+              //      agent any
+              //      //This environment block defines two variables which will be used later in the 'Deliver' stage.
+              //      environment {
+              //          VOLUME = '$(pwd)/sources:/src'
+              //          //VOLUME = '${env.WORKSPACE}/sources:/src'
+              //          IMAGE = 'cdrx/pyinstaller-windows:python3'
+               //      }
+             agent {
+             docker {
+                 // image 'cdrx/pyinstaller-linux:python3'
+                  image 'python:3-alpine'
+                   }
+                }
                     steps {
                         //This dir step creates a new subdirectory named by the build number.
                         //The final program will be created in that directory by pyinstaller.
@@ -80,18 +81,19 @@ pipeline {
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
                             //sh "ls -la ${VOLUME}"
-                            sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
-                            sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
-                            sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src/' --entrypoint pwd ${IMAGE} "
-                            sh "docker run --rm -v  ${VOLUME} ${IMAGE} 'ls'"
-                            sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src/' ${IMAGE} ls -la /src "
-                            sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources:/src/ ${IMAGE} 'ls' "
-                            sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} add2vals.py"
+                            //sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
+                            //sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
+                            //sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src/' --entrypoint pwd ${IMAGE} "
+                            //sh "docker run --rm -v  ${VOLUME} ${IMAGE} 'ls'"
+                            //sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src/' ${IMAGE} ls -la /src "
+                            //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources:/src/ ${IMAGE} 'ls' "
+                            //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} add2vals.py"
                             //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  ${IMAGE} 'pyinstaller -F ${env.WORKSPACE}/${env.BUILD_ID}/sources/add2vals.py'"
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
-                            //sh 'pyinstaller -F sources/add2vals.py'
+                            sh "pip install -r pyinstall --user"
+                            sh 'pyinstaller -F sources/add2vals.py'
                         }
                     }
             post {
