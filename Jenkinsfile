@@ -82,8 +82,8 @@ pipeline {
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
                             //sh "docker run --rm -v 'python -m PyInstaller -F sources/add2vals.py'"
-                            sh "ls -la ${VOLUME}"
-                            sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources/"
+                            //sh "ls -la ${VOLUME}"
+                            sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
                             sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
                             sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
                             sh "docker run --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' --entrypoint pwd ${IMAGE} "
