@@ -92,7 +92,7 @@ pipeline {
                             //sh "docker run --privileged --rm -v  ${VOLUME} ${IMAGE} 'ls'"
                             sh "docker run   --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' ${IMAGE} 'ls -la' "
                             sh "docker run   --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}:/src' ${IMAGE} 'ls -la' "
-                            sh "docker run   --privileged--rm -v  ${env.WORKSPACE}/${env.BUILD_ID}:/src  ${IMAGE} 'ls -la sources' "
+                            sh "docker run   --privileged --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}:/src  ${IMAGE} 'ls -la sources' "
                             sh "docker run   --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}:/src'  ${IMAGE} ls -la src/sources "
                             sh "docker run   --privileged --rm -v  '${env.WORKSPACE}:/src' ${IMAGE} 'ls -la sources/' "
                             //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} add2vals.py"
