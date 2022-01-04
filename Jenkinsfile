@@ -90,7 +90,7 @@ pipeline {
                             sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
                             sh "docker run -t --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' --entrypoint pwd ${IMAGE} "
                             //sh "docker run -t --rm -v  ${VOLUME} ${IMAGE} 'ls'"
-                            sh "docker run  -t --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' -w ${IMAGE} 'ls -la' "
+                            sh "docker run  -t --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' ${IMAGE} 'ls -la' "
                             sh "docker run  -t --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}:/src' ${IMAGE} 'ls -la' "
                             sh "docker run  -t --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}:/src  ${IMAGE} 'ls -la sources' "
                             sh "docker run  -t --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}:/src'  ${IMAGE} ls -la src/sources "
