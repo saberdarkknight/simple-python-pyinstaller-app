@@ -107,10 +107,10 @@ pipeline {
                     }
             post {
                 success {
-                    archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
+                    //archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
                     //archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
                     //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
-                    //archiveArtifacts "${env.BUILD_ID}/dist/*"
+                    archiveArtifacts "${env.BUILD_ID}/dist/*"
                 }
             }
         }
