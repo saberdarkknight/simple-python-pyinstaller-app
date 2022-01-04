@@ -103,7 +103,7 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             sh "python3 -m pip install pyinstaller"
                             //sh 'python3 -m PyInstaller -F sources/add2vals.py'
-                            sh 'python3 -m PyInstaller -D sources/add2vals.py'
+                            sh 'python3 -m PyInstaller -F sources/add2vals.py'
                         }
                     }
             post {
