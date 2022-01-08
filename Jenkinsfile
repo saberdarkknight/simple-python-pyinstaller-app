@@ -75,7 +75,7 @@ pipeline {
                         //This unstash step restores the Python source code and compiled byte
                         //code files (with .pyc extension) from the previously saved stash. image]
                         //and runs this image as a separate container.
-                        //dir(path: env.BUILD_ID) {
+                        dir(path: env.BUILD_ID) {
                             unstash(name: 'compiled-results')
 
                             //This sh step executes the pyinstaller command (in the PyInstaller container) on your simple Python application.
@@ -107,11 +107,11 @@ pipeline {
                             sh "python3 -m pip install pyinstaller"
                             //sh 'python3 -m PyInstaller -F sources/add2vals.py'
                             sh 'pyinstaller -F sources/add2vals.py'
-                        //}
+                        }
                     }
             post {
                 success {
-                    archiveArtifacts 'dist/add2vals'
+                    archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
                     // archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
                     //archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
                     //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
