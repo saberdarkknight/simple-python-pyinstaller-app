@@ -106,12 +106,12 @@ pipeline {
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             sh "python3 -m pip install pyinstaller"
                             //sh 'python3 -m PyInstaller -F sources/add2vals.py'
-                            sh "python3 -m PyInstaller -F sources/add2vals.py"
+                            sh 'pyistaller -F sources/add2vals.py'
                         }
                     }
             post {
                 success {
-                    archiveArtifacts 'sources/dist/add2vals'
+                    archiveArtifacts 'dist/add2vals'
                     // archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
                     //archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
                     //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
