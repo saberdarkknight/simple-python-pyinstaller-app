@@ -111,11 +111,8 @@ pipeline {
                     }
             post {
                 success {
-<<<<<<< HEAD
                     archiveArtifacts 'dist/add2vals'
-=======
                     //archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
->>>>>>> 1632ebe7d9f252ca3d0aeb02af55d299176900fc
                     //archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
                     //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                 }
