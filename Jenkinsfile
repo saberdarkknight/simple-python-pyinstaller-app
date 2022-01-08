@@ -53,13 +53,21 @@ pipeline {
             }
         }
         stage('Deliver') {
-                    agent any
-                    //This environment block defines two variables which will be used later in the 'Deliver' stage.
-                    environment {
-                        //VOLUME = '$(pwd)/sources:/src'
-                        //VOLUME = '${env.WORKSPACE}/sources:/src'
-                        IMAGE = 'cdrx/pyinstaller-linux:python3'
-                    }
+             //     agent any
+             //       //This environment block defines two variables which will be used later in the 'Deliver' stage.
+             //       environment {
+             //           VOLUME = '$(pwd)/sources:/src'
+             //          //VOLUME = '${env.WORKSPACE}/sources:/src'
+             //           IMAGE = 'cdrx/pyinstaller-windows:python3'
+             //        }
+             agent {
+             docker {
+                  //image 'cdrx/pyinstaller-linux:python3'
+                  //image 'python:3-alpine'
+                  //image 'six8/pyinstaller-alpine'
+                   image 'python:3.6'
+                   }
+                }
                     steps {
                         //This dir step creates a new subdirectory named by the build number.
                         //The final program will be created in that directory by pyinstaller.
@@ -74,18 +82,43 @@ pipeline {
                             //This bundles your add2vals.py Python application into a single standalone executable file
                             //and outputs this file to the dist workspace directory (within the Jenkins home directory).
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 -m PyInstaller -F add2vals.py'"
+                            //sh "docker run --rm -v 'python -m PyInstaller -F sources/add2vals.py'"
                             //sh "ls -la ${VOLUME}"
+<<<<<<< HEAD
                             //sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
                             //sh "docker run --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} add2vals.py"
                             sh 'pyinstaller -F add2vals.py'
+=======
+                            sh "pwd"
+                            sh "ls"
+                            //sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
+                            //sh "docker run -t --rm -v ${env.WORKSPACE}/${env.BUILD_ID}/sources --entrypoint pwd ${IMAGE}"
+                            //sh "ls -la ${env.WORKSPACE}/${env.BUILD_ID}/sources"
+                            //sh "docker run --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' --entrypoint pwd ${IMAGE} "
+                            //sh "docker run --privileged --rm -v  ${VOLUME} ${IMAGE} 'ls'"
+                            //sh "docker run   --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}/sources:/src' ${IMAGE} 'ls -la' "
+                            //sh "docker run   --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}:/src' ${IMAGE} 'ls -la' "
+                            //sh "docker run   --privileged --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}:/src  ${IMAGE} 'ls -la sources' "
+                            //sh "docker run   --privileged --rm -v  '${env.WORKSPACE}/${env.BUILD_ID}:/src'  ${IMAGE} ls -la src/sources "
+                            //sh "docker run   --privileged --rm -v  '${env.WORKSPACE}:/src' ${IMAGE} 'ls -la sources/' "
+                            //sh "docker run --rm -v  ${env.WORKSPACE}/${env.BUILD_ID}/sources  --entrypoint cat ${IMAGE} add2vals.py"
+                            //sh "docker run --rm -v  '${env.WORKSPACE}/sources:/src/'  ${IMAGE} 'pyinstaller -F add2vals.spec'"
+>>>>>>> 1632ebe7d9f252ca3d0aeb02af55d299176900fc
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
                             //sh 'python3 setup.py bdist_dumb --format=zip'
                             //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python3 setup.py bdist_dumb --format=zip'"
+                            sh "python3 -m pip install pyinstaller"
+                            //sh 'python3 -m PyInstaller -F sources/add2vals.py'
+                            sh 'python3 -m PyInstaller -F sources/add2vals.py'
                         }
                     }
             post {
                 success {
+<<<<<<< HEAD
                     archiveArtifacts 'dist/add2vals'
+=======
+                    //archiveArtifacts '${env.BUILD_ID}/dist/add2vals'
+>>>>>>> 1632ebe7d9f252ca3d0aeb02af55d299176900fc
                     //archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
                     //sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                 }
